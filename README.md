@@ -1,11 +1,11 @@
 # Nội dung
-1. [Statefull component](#statefull)
+1. [Stateful component](#stateful)
 2. [Stateless component/function](#stateless)
 3. [Thuộc tính lan truyền (spread attributes/operators)](#spread)
 4. [Điều kiện để render (Conditional rendering)](#conditional)
 5. [Chilrend types](#chilrend)
 
-## <a id="statefull" ></a> Statefull component
+## <a id="stateful" ></a> Stateful component
 Sử dụng hầu hết trong React vì có sử dụng API lifecycle của React, có ít nhất là 1 API function trong component.
 ```js
 import React, { Component } from "react";
@@ -163,4 +163,9 @@ render() {
 ```
 > Lưu ý: nên sử dụng cách 2 vì nhìn sẽ gọn và đỡ rối mắt hơn cách 1.
 
+## <a id="hocs" ></a>Higher-Order Components (HOCs)
+Một HOCs là 1 kỹ thuật nâng cao trong React trong việc tái sử dụng (reusing) `component logic`. HOCs không nằm trong React API. Chúng là một mô hình nổi lên từ những tính chất tổng hợp của React.
 
+Có 02 cách sử dụng HOCs: HOCs nhận props và trả về giá trị muốn trả về và HOCs là `wrapper logic` cho 1 hay nhiều component.
+### HOCs nhận props và trả về giá trị
+Thường được sử dụng chung `thư viện bên thứ 3 của React (third-party React libraries)` như `connect` của Redux hoặc truyền props 1 cách static nhất.
