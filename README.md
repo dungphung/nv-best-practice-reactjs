@@ -1,11 +1,11 @@
 # Nội dung
-1. [Statefull component](#statefull-component)
-2. [Stateless component/function](#stateless-component-/-function)
-3. [Thuộc tính lan truyền (spread attributes/operators)](#Thuộc-tính-lan-truyền-(spread-attributes-/-operators))
-4. [Điều kiện để render (Conditional rendering)](#Điều-kiện-để-render-(conditional-rendering))
-5. [Chilrend types](#chilrend-types)
+1. [Statefull component](#statefull)
+2. [Stateless component/function](#stateless)
+3. [Thuộc tính lan truyền (spread attributes/operators)](#spread)
+4. [Điều kiện để render (Conditional rendering)](#conditional)
+5. [Chilrend types](#chilrend)
 
-## Statefull component
+## <a id="statefull" ></a> Statefull component
 Sử dụng hầu hết trong React vì có sử dụng API lifecycle của React, có ít nhất là 1 API function trong component.
 ```js
 import React, { Component } from "react";
@@ -41,7 +41,7 @@ class App extends Component {
 }
 ```
 
-## Stateless component/function
+## <a id="stateless" ></a>Stateless component/function
 Sử dụng khi render 01 component mà trả về hàm render các thẻ HTML và có thể tái sử dụng, không có API lifecycle của react.
 
 Có 02 dạng stateless component/function.
@@ -69,7 +69,7 @@ const StateLessWithoutProps = () => {
 };
 ```
 > Lưu ý: nên sử dụng `StateLessWithProps` vì tính cơ động, có thể thay đổi giá trị của component mà không cần sửa giá trị ở trong component đó. Còn đối với `StateLessWithoutProps` nên dùng những static render chỉ cần 1 giá trị nhất định và chắc chắn không thay đổi.
-## Thuộc tính lan truyền (spread attributes/operators)
+## <a id="spread" ></a>Thuộc tính lan truyền (spread attributes/operators)
 Đây là tính năng mới của javascript ES5 (ECMAScript 5), sử dụng dấu "..." trước 1 object để lấy hết tất cả giá trị có trong object đó. Tương tự như trong React.
 ```js
 // SpreadAttributes.js
@@ -98,7 +98,7 @@ render() {
 }
 ```
 > Sử dụng spread attributes/operators khi không biết component/function con cần bao nhiêu giá trị, sử dụng spread attributes/operators sẽ giúp code gọn hơn nhưng cần tránh sử dụng nhiều vì sẽ gây ra hậu quả là component/function con sẽ phải nhận những props không cần thiết.
-## Điều kiện để render (Conditional rendering)
+## <a id="conditional" ></a>Điều kiện để render (Conditional rendering)
 Không thể dùng `if/else` bình thường ở trong hàm render của 1 component, chỉ có thể dùng những điều kiện sau:
 ```js
 // if
@@ -111,7 +111,7 @@ Không thể dùng `if/else` bình thường ở trong hàm render của 1 compo
   : <span>Rendered when condition equal `false`</span>
 }
 ```
-## Chilrend types
+## <a id="chilrend" ></a>Chilrend types
 Có 03 kiểu chilrend trong react rendering:
 ### String
 ```html
