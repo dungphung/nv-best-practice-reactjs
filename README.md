@@ -1,9 +1,9 @@
 # Nội dung
 1. [Statefull component](#statefull-component)
-2. [Stateless component/function](#stateless-component/function)
-3. [Thuộc tính lan truyền (spread attributes/operators)](#Thuộc-tính-lan-truyền-(spread-attributes/operators))
-4. [Điều kiện để render (Conditional rendering)](#Điều-kiện-để-render-(Conditional-rendering))
-5. [Chilrend types](#Chilrend-types)
+2. [Stateless component/function](#stateless-component-/-function)
+3. [Thuộc tính lan truyền (spread attributes/operators)](#Thuộc-tính-lan-truyền-(spread-attributes-/-operators))
+4. [Điều kiện để render (Conditional rendering)](#Điều-kiện-để-render-(conditional-rendering))
+5. [Chilrend types](#chilrend-types)
 
 ## Statefull component
 Sử dụng hầu hết trong React vì có sử dụng API lifecycle của React, có ít nhất là 1 API function trong component.
