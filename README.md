@@ -5,7 +5,8 @@
 4. [Điều kiện để render (Conditional rendering)](#conditional)
 5. [Handling event (Các event onClick, onChange, ...)](#handling-event)
 6. [Chilrend types](#chilrend)
-7. [Higher-Order Components (HOCs)](#hocs)
+7. [Key Prop](#key)
+8. [Higher-Order Components (HOCs)](#hocs)
 
 ## <a id="stateful" ></a> Stateful component
 Sử dụng hầu hết trong React vì có sử dụng API lifecycle của React, có ít nhất là 1 API function trong component.
@@ -192,6 +193,34 @@ render() {
 }
 ```
 > Lưu ý: nên sử dụng cách 2 vì nhìn sẽ gọn và đỡ rối mắt hơn cách 1.
+
+## <a id="key" ></a>Key Prop
+Khi dùng API `map` của `javascript` rendering 01 array data, sẽ trả về 2 giá trị `item | value | bất cứ thứ gì mà bạn muốn defined` và `key | index | bất cứ thứ gì mà bạn muốn`.
+
+Key prop phải đạt đủ 03 chỉ tiêu:
+> * `Unique` mỗi item sẽ có 1 key duy nhất và độc nhất.
+> * `Stable` mỗi item sẽ phải có 1 key ổn định và không thay đổi mỗi khi re-render.
+> * `Predictable` key của item đó có thể đoán trước, chứ không thể dùng random string hoặc random number.
+
+> Lưu ý: không sử dụng `timestamps` để làm key prop vì không ổn định và không thể đoán trước được.
+
+Mỗi thẻ giá trị được trả về trong function `map` bắt buộc phải có prop `key` để đánh dấu rằng thẻ này có giá trị. `key` có thể là `string` hoặc là `number`. Có 2 cách gán `key` cho thẻ:
+### Dùng key/index của function map (không khuyến khích dùng)
+```js
+// Not recommended to use this
+data.map((item, key) => {
+  return <li key={`key_${key}`} >{item}</li>
+})
+```
+> Khi dùng `key/index` của `map` sẽ khiến cho list data bị render lại và prop `key` không được ổn định và không đoán trước được và list data có thể bị đảo lộn.
+### Dùng giá trị id (id value) có trong từng element trong array data
+```js
+// Recommended to use this
+data.map(item => {
+  return <li key={`key_${item.id}`} >{item.value}</li>
+})
+```
+> Khi dùng `id` element thì sẽ tránh được việc list data thay đổi khi re-render và không bị duplicate key prop.
 
 ## <a id="hocs" ></a>Higher-Order Components (HOCs)
 Một HOCs là 1 kỹ thuật nâng cao trong React trong việc tái sử dụng (reusing) `component logic`. HOCs không nằm trong React API. Chúng là một mô hình nổi lên từ những tính chất tổng hợp của React.
