@@ -10,6 +10,20 @@ import "../App.css";
 
 @ComponentLogic
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "Hello world!!!"
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange = e => {
+    this.setState({
+      text: e.target.value
+    });
+  };
+
   spreadAttributes = () => {
     return {
       title: "This is a title",
@@ -18,7 +32,6 @@ export default class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="App">
         <header className="App-header">
@@ -28,6 +41,7 @@ export default class App extends Component {
           <StateLessWithProps style={{}} text="Stateless with props" />
           <p>Spread attributes</p>
           <SpreadAttributes {...this.spreadAttributes()} />
+          <input type="text" value={this.state.text} onChange={this.onChange} />
         </header>
       </div>
     );

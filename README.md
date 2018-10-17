@@ -3,8 +3,9 @@
 2. [Stateless component/function](#stateless)
 3. [Thuộc tính lan truyền (spread attributes/operators)](#spread)
 4. [Điều kiện để render (Conditional rendering)](#conditional)
-5. [Chilrend types](#chilrend)
-6. [Higher-Order Components (HOCs)](#hocs)
+5. [Handling event (Các event onClick, onChange, ...)](#handling-event)
+6. [Chilrend types](#chilrend)
+7. [Higher-Order Components (HOCs)](#hocs)
 
 ## <a id="stateful" ></a> Stateful component
 Sử dụng hầu hết trong React vì có sử dụng API lifecycle của React, có ít nhất là 1 API function trong component.
@@ -110,6 +111,34 @@ Không thể dùng `if/else` bình thường ở trong hàm render của 1 compo
 {condition
   ? <span>Rendered when condition equal `true`</span>
   : <span>Rendered when condition equal `false`</span>
+}
+```
+## <a id="handling-event" ></a>Handling event (Các event onClick, onChange, ...)
+Các function event được tạo ra phải `bind` vào API `constructor()` của React để biến `this` hoạt động trong `callback`
+```js
+constructor(props) {
+  super(props);
+  this.state = {
+    text: "Hello world!!!"
+  };
+  // Must have when create new function that using by an event like onClick or onChange
+  this.onChange = this.onChange.bind(this);
+}
+
+onChange = e => {
+  this.setState({
+    text: e.target.value
+  });
+};
+```
+Hoặc nếu đã có sẵn `@autobind` khi dùng thư viện `core-decorators` thì không cần bind từng function như ở trên.
+
+Decorator `@autobind` được khai báo trên class
+```js
+// No need to bind code-by-code anymore
+@autobind
+class App extends React.Component {
+  ...
 }
 ```
 ## <a id="chilrend" ></a>Chilrend types
@@ -234,7 +263,7 @@ Có thể sử dụng HOC bằng 2 cách: `wrapped thông thường` hoặc sử
 ```js
 // App.js
 class App extends React.Component {
-  ....
+  ...
 }
 export default ComponentLogic(App);
 ```
@@ -243,6 +272,6 @@ export default ComponentLogic(App);
 // App.js
 @ComponentLogic
 export default class App extends React.Component {
-  ....
+  ...
 }
 ```
