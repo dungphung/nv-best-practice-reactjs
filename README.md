@@ -4,6 +4,7 @@
 3. [Thuộc tính lan truyền (spread attributes/operators)](#spread)
 4. [Điều kiện để render (Conditional rendering)](#conditional)
 5. [Chilrend types](#chilrend)
+6. [Higher-Order Components (HOCs)](#hocs)
 
 ## <a id="stateful" ></a> Stateful component
 Sử dụng hầu hết trong React vì có sử dụng API lifecycle của React, có ít nhất là 1 API function trong component.
@@ -169,3 +170,79 @@ Một HOCs là 1 kỹ thuật nâng cao trong React trong việc tái sử dụn
 Có 02 cách sử dụng HOCs: HOCs nhận props và trả về giá trị muốn trả về và HOCs là `wrapper logic` cho 1 hay nhiều component.
 ### HOCs nhận props và trả về giá trị
 Thường được sử dụng chung `thư viện bên thứ 3 của React (third-party React libraries)` như `connect` của Redux hoặc truyền props 1 cách static nhất.
+```js
+const HOCs = (id, value) => {
+  return id && value ? MyHOCs(id, value) : { id, value };
+};
+
+const MyHOCs = (id, value) => {
+  return {
+    newId: `this is my id: ${id}`,
+    newValue: `this is my value: ${value}`
+  };
+};
+```
+Và khi sử dụng chung với `connect` của Redux
+```js
+function connectAutoDispatch(mapStateToProps, actions, ...args) {
+  return connect(
+    mapStateToProps,
+    dispatch => bindActionCreators(actions, dispatch),
+    ...args
+  );
+}
+
+export default connectAutoDispatch(
+  state => {
+    return {
+      ...HOCs(id: state.id, value: state.value)
+    };
+  },
+  {}
+)(WrapperComponent)
+```
+### HOCs bao gồm logic của Wrapped component
+Một HOC chứa logic code của 1 component mà nó che phủ (wrapped)
+```js
+// ComponentLogic.js
+import React from "react";
+
+const componentLogic = WrapperComponent => {
+  class Component extends React.Component {
+    state = {
+      text: "Hello World!!!"
+    };
+
+    onChange = e => {
+      this.setState({
+        text: e.target.value
+      });
+    };
+
+    render() {
+      return <WrapperComponent {...this.state} onChange={this.onChange} />;
+    }
+  }
+
+  return Component;
+};
+
+export default componentLogic;
+```
+Có thể sử dụng HOC bằng 2 cách: `wrapped thông thường` hoặc sử dụng `decorator`
+#### Wrapped thông thường
+```js
+// App.js
+class App extends React.Component {
+  ....
+}
+export default ComponentLogic(App);
+```
+#### Dùng decorator
+```js
+// App.js
+@ComponentLogic
+export default class App extends React.Component {
+  ....
+}
+```

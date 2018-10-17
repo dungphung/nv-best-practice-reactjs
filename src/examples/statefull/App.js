@@ -5,11 +5,11 @@ import {
   StateLessWithoutProps
 } from "../stateless/StateLess";
 import SpreadAttributes from "../stateless/SpreadAttributes";
-import HOCs from "../HOCs/HOCs";
+import ComponentLogic from "../HOCs/ComponentLogic";
 import "../App.css";
 
-@HOCs(1, "hello")
-class App extends Component {
+@ComponentLogic
+export default class App extends Component {
   spreadAttributes = () => {
     return {
       title: "This is a title",
@@ -34,4 +34,4 @@ class App extends Component {
   }
 }
 
-export default App;
+// export default ComponentLogic(App);
